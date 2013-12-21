@@ -3,7 +3,7 @@
 
 
 <form class="form-signin" role="form" method="post" action="/login">
-    <% if (message) { %>
+    <% if (message.length > 0) { %>
         <div class="alert alert-danger">
             <p><%= message %></p>
         </div>
