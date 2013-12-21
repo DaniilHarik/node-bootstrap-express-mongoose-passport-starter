@@ -1,0 +1,10 @@
+<% layout( '../layout') -%>
+<link href="css/signin.css" rel="stylesheet">
+    
+<form class="form-signin" role="form" id="signup" method="post" action="/signup">
+    <h2 class="form-signin-heading">Please sign up</h2>
+    <input type="text" class="form-control" name="email" placeholder="Email address" required autofocus>
+    <input type="password" class="form-control" name="password" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <a href="/auth/facebook">Log In With Facebook</a>
+</form>

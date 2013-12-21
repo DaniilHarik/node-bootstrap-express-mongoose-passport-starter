@@ -1,0 +1,9 @@
+<% layout('../layout') -%>
+
+<a href="/logout">Logout</a>
+
+<% if(user.name) { %>
+    <h1> <%= user.name %>'s Profile </h1>
+<% }else { %>
+    <h1> <%= user.email %>'s Profile </h1>
+<% } %>
