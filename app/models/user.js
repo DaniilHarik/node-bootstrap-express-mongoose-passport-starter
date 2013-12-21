@@ -38,7 +38,6 @@ UserSchema.methods.hashPassword = function(password) {
     });
 };
 
-
 UserSchema.statics.findOrCreateFaceBookUser = function(profile, done){
 	var User = this;
 	this.findOne({ 'facebook.id' : profile.id }, function(err, user){
