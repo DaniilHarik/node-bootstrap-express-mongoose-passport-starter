@@ -2,6 +2,7 @@ var express = require('express'),
     fs = require('fs'),
     http = require('http'),
     path = require('path'),
+    MongoStore = require('connect-mongo')
     mongoose = require('mongoose'),
     passport = require("passport"),
     flash = require("connect-flash"),
@@ -36,7 +37,10 @@ app.configure(function () {
     app.use(express.bodyParser());
     app.use(express.session({
         secret: 'asdalaspnlsfasjkhk',
-        cookie: { maxAge: 60000 }
+        cookie: { maxAge: 60000 },
+//        store   : new MongoStore({
+//            url  : config.db
+//        })
     }));
     app.use(passport.initialize());
     app.use(passport.session());

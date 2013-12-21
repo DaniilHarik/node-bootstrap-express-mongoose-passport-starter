@@ -18,6 +18,8 @@
     "express-validator": "~1.0.1",
     "consolidate": "~0.10.0",
     "ejs": "~0.8.5",
-    "ejs-locals": "~1.0.2"
+    "ejs-locals": "~1.0.2",
+    "connect-mongo": "~0.4.0",
+    "bcrypt-nodejs": "0.0.3"
   }
 }

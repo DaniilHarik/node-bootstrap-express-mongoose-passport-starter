@@ -21,7 +21,7 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.post("/login", passport.authenticate('local', {
+    app.post("/login", passport.authenticate('local-login', {
         successRedirect: "/",
         failureRedirect: "/login",
         failureFlash: true 
@@ -29,19 +29,17 @@ module.exports = function (app, passport) {
 
     app.get("/signup", function (req, res) {
         res.render("user/signup", {
-            user: req.user
+            user: req.user, 
+            message : req.flash("error")
         });
     });
-
-    app.post("/signup", Auth.userExist, function (req, res, next) {
-        User.signup(req.body.email, req.body.password, function (err, user) {
-            if (err) throw err;
-            req.login(user, function (err) {
-                if (err) return next(err);
-                return res.redirect("profile");
-            });
-        });
-    });
+    
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+    
 
     app.get("/auth/facebook", passport.authenticate("facebook", {
         scope: "email"
@@ -59,7 +57,7 @@ module.exports = function (app, passport) {
     );
 
     app.get("/profile", Auth.isAuthenticated, function (req, res) {
-        res.render("profile", {
+        res.render("user/profile", {
             user: req.user
         });
     });

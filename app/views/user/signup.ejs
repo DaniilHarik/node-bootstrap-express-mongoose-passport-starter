@@ -2,6 +2,11 @@
 <link href="css/signin.css" rel="stylesheet">
     
 <form class="form-signin" role="form" id="signup" method="post" action="/signup">
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger">
+            <p><%= message %></p>
+        </div>
+    <% } %>
     <h2 class="form-signin-heading">Please sign up</h2>
     <input type="text" class="form-control" name="email" placeholder="Email address" required autofocus>
     <input type="password" class="form-control" name="password" placeholder="Password" required>

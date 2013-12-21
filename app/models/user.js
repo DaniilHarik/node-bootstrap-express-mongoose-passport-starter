@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
-var hash = require('../util/hash');
+var bcrypt   = require('bcrypt-nodejs');
 
 UserSchema = mongoose.Schema({
-	firstName:  String,
-	lastName:   String,
+	firstname:  String,
+	lastname:   String,
 	email:      String,
-	salt:       String,
-	hash:       String,
+	password:       String,
 	facebook:{
 		id:       String,
 		email:    String,
@@ -20,39 +19,24 @@ UserSchema = mongoose.Schema({
 });
 
 
-UserSchema.statics.signup = function(email, password, done){
-	var User = this;
-	hash(password, function(err, salt, hash){
-		if(err) throw err;
-		// if (err) return done(err);
-		User.create({
-			email : email,
-			salt : salt,
-			hash : hash
-		}, function(err, user){
-			if(err) throw err;
-			// if (err) return done(err);
-			done(null, user);
-		});
-	});
-}
 
-
-UserSchema.statics.isValidUserPassword = function(email, password, done) {
-	this.findOne({email : email}, function(err, user){
-		// if(err) throw err;
-		if(err) return done(err);
-		if(!user) return done(null, false, { message : 'Incorrect email.' });
-		hash(password, user.salt, function(err, hash){
-			if(err) return done(err);
-			if(hash == user.hash) return done(null, user);
-			done(null, false, {
-				message : 'Incorrect password'
-			});
-		});
-	});
+// checking if password is valid using bcrypt
+UserSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
 };
 
+// this method hashes the password and sets the users password
+UserSchema.methods.hashPassword = function(password) {
+    var user = this;
+
+    // hash the password
+    bcrypt.hash(password, null, null, function(err, hash) {
+        if (err)
+            return next(err);
+
+        user.password = hash;
+    });
+};
 
 
 UserSchema.statics.findOrCreateFaceBookUser = function(profile, done){
