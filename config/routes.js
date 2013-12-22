@@ -1,4 +1,8 @@
 var User = require('../app/models/user');
+
+var UserController = require('../app/controllers/user');
+var AdminUserController = require('../app/controllers/admin/user');
+
 var Auth = require('./middlewares/authorization.js');
 
 module.exports = function (app, passport) {
@@ -41,20 +45,20 @@ module.exports = function (app, passport) {
     }));
     
 
-    app.get("/auth/facebook", passport.authenticate("facebook", {
-        scope: "email"
-    }));
-
-    app.get("/auth/facebook/callback",
-        passport.authenticate("facebook", {
-            failureRedirect: '/login'
-        }),
-        function (req, res) {
-            res.render("profile", {
-                user: req.user
-            });
-        }
-    );
+//    app.get("/auth/facebook", passport.authenticate("facebook", {
+//        scope: "email"
+//    }));
+//
+//    app.get("/auth/facebook/callback",
+//        passport.authenticate("facebook", {
+//            failureRedirect: '/login'
+//        }),
+//        function (req, res) {
+//            res.render("profile", {
+//                user: req.user
+//            });
+//        }
+//    );
 
     app.get("/profile", Auth.isAuthenticated, function (req, res) {
         res.render("user/profile", {
@@ -66,4 +70,6 @@ module.exports = function (app, passport) {
         req.logout();
         res.redirect('/login');
     });
+    
+    app.get('/admin/users', AdminUserController.index);
 }

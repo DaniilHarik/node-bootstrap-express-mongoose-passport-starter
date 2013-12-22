@@ -1,0 +1,34 @@
+<% layout( '../../layout') -%>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% items.forEach( function( item ){ %>
+            <tr>
+                <td>
+                    <a href="mailto:<%= item.email %>">
+                        <%= item.email %>
+                        <i class="icon-envelope"></i>
+                    </a>
+                </td>
+                <td>
+                    <div>
+                         <a type="button" class="btn btn-primary" href="/admin/user/edit/<%= item._id %>"title="" data-placement="top" data-original-title="EDIT USER?">
+                            <i class="icon-remove"></i>
+                            Edit
+                        </a>
+                        <a type="button" class="btn btn-danger " href="/admin/user/remove/<%= item._id %>" onclick="return confirm('Are you sure?')" title="" data-placement="top" data-original-title="REMOVE USER?">
+                            <i class="icon-remove"></i>
+                            Remove
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            <% }); %>
+    </tbody>
+</table>
