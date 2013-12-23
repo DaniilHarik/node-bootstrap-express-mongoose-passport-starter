@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Role</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -13,12 +14,15 @@
                 <td>
                     <a href="mailto:<%= item.email %>">
                         <%= item.email %>
-                        <i class="icon-envelope"></i>
+                            <i class="icon-envelope"></i>
                     </a>
                 </td>
                 <td>
+                    <%= item.role %>
+                </td>
+                <td width="150">
                     <div>
-                         <a type="button" class="btn btn-primary" href="/admin/user/edit/<%= item._id %>"title="" data-placement="top" data-original-title="EDIT USER?">
+                        <a type="button" class="btn btn-primary" href="/admin/user/edit/<%= item._id %>" title="" data-placement="top" data-original-title="EDIT USER?">
                             <i class="icon-remove"></i>
                             Edit
                         </a>
