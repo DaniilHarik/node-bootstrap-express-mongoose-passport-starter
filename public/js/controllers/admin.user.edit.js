@@ -23,6 +23,7 @@ function AdminUserEditController($scope, $http) {
     $scope.save = function () {
         $http.put(url + $scope.id, $scope.model).
         success(function (data) {
+            
         });
     };
 }

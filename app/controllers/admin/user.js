@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    binder = require('../../util/binder.js')
     User = mongoose.model('User');
 
 
@@ -13,8 +14,21 @@ exports.get = function (req, res) {
     })
 }
 
-
 exports.delete = function (req, res) {
+    User.findOne({
+        _id: req.params.id
+    }, function (err, item) {
+        if (err)
+            console.log(items);
+
+        res.render("admin/user/edit", {
+            user: req.user,
+            item: item
+        });
+    })
+}
+
+exports.edit = function (req, res) {
     User.findOne({
         _id: req.params.id
     }, function (err, item) {
@@ -35,32 +49,12 @@ exports.update = function (req, res) {
         if (err)
             console.log(err);
 
-        for (var field in User.schema.paths) {
-            if ((field !== '_id') && (field !== '__v')) {
-                if (req.body[field] !== undefined) {
-                    item[field] = req.body[field];
-                }
-            }
-        }
+        binder(req, item, User)
 
         item.save();
         
         res.json({
             result: true
-        });
-    })
-}
-
-exports.edit = function (req, res) {
-    User.findOne({
-        _id: req.params.id
-    }, function (err, item) {
-        if (err)
-            console.log(items);
-
-        res.render("admin/user/edit", {
-            user: req.user,
-            item: item
         });
     })
 }
