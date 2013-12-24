@@ -1,0 +1,29 @@
+<% layout( '../../layout') -%>
+    
+<%= item.id %>
+
+<script src="/js/controllers/admin.user.edit.js"></script>
+<div ng-controller="AdminUserEditController">
+
+  <form>
+
+    <label>Name:</label><br/>
+    <input type="text" ng-model="form.name" required/> <br/><br/>
+
+    <label>Email:</label><br/>
+    <input type="text" ng-model="form.email" value="<%= item.email %>"  required/> <br/><br/>
+    
+    <label>Contacts:</label>[ <a href="" ng-click="addContact()">add</a> ]
+    <div ng-repeat="contact in form.contacts">
+      <select ng-model="contact.type">
+        <option>email</option>
+        <option>phone</option>
+        <option>pager</option>
+        <option>IM</option>
+      </select>
+      <input type="text" ng-model="contact.value" required/>[ <a href="" ng-click="removeContact($index)">X</a> ]
+    </div>
+  <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
+  <button ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>
+</form>
+

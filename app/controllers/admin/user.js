@@ -1,6 +1,19 @@
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
 
+
+exports.edit = function (req, res) {
+    User.findOne( {_id :  req.params.id}, function (err, item) {
+        if (err)
+            console.log(items);
+
+        res.render("admin/user/edit", {
+            user: req.user,
+            item: item
+        });
+    })
+}
+
 exports.index = function (req, res) {
     User.find(function (err, items) {
         if (err)
