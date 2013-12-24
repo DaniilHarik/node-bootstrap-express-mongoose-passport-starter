@@ -71,6 +71,6 @@ module.exports = function (app, passport) {
         res.redirect('/login');
     });
     
-    app.get('/admin/user', AdminUserController.index);
-    app.get('/admin/user/edit/:id', AdminUserController.edit);
+    app.get('/admin/users', AdminUserController.index);
+    app.get('/admin/users/:id/edit', AdminUserController.edit);
 }

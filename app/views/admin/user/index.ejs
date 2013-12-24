@@ -22,11 +22,11 @@
                 </td>
                 <td width="150">
                     <div>
-                        <a type="button" class="btn btn-primary" href="/admin/user/edit/<%= item._id %>" title="" data-placement="top" data-original-title="EDIT USER?">
+                        <a type="button" class="btn btn-primary" href="/admin/users/<%= item._id %>/edit" title="" data-placement="top" data-original-title="EDIT USER?">
                             <i class="icon-remove"></i>
                             Edit
                         </a>
-                        <a type="button" class="btn btn-danger " href="/admin/user/remove/<%= item._id %>" onclick="return confirm('Are you sure?')" title="" data-placement="top" data-original-title="REMOVE USER?">
+                        <a type="button" class="btn btn-danger " href="/admin/users/<%= item._id %>/remove" onclick="return confirm('Are you sure?')" title="" data-placement="top" data-original-title="REMOVE USER?">
                             <i class="icon-remove"></i>
                             Remove
                         </a>
