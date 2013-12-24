@@ -1,25 +1,32 @@
 <% layout( '../../layout') -%>
 
-<script src="/js/controllers/admin.user.edit.js"></script>
 <div ng-controller="AdminUserEditController" class="col-sm-6 col-sm-offset-3">
-
-    <form role="form" novalidate ng-init="id='users/<%= item.id %>'">
+    <form role="form" novalidate  ng-init="load('users/<%= item.id %>')">
         <div class="form-group">
-            <label>Name:</label>
-
-            <input type="text" class="form-control" ng-model="form.name" required/>
+            <label>Firstname:</label>
+            <input type="text" class="form-control" ng-model="model.firstname" required/>
         </div>
 
         <div class="form-group">
+            <label>Lastname:</label>
+            <input type="text" class="form-control" ng-model="model.lastname" required/>
+        </div>
+            
+        <div class="form-group">
             <label>Email:</label>
-            <input type="text" class="form-control" ng-model="form.email" value="<%= item.email %>" required/>
+            <input type="text" class="form-control" ng-model="model.email"required/>
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="text" class="form-control" ng-model="model.password"required/>
         </div>
         <div class="form-group">
             <label>Role:</label>
-            <select ng-model="form.role" class="form-control" ng-options="r.name for r in form.roles" ></select>
+            <select ng-model="model.role" class="form-control" ng-options="r.name for r in roles" ></select>
         </div>
-        <button ng-click="cancel()" ng-disabled="isCancelDisabled()" class="btn btn-default">Cancel</button>
-        <button ng-click="save()" ng-disabled="isSaveDisabled()" class="btn btn-primary">Save</button>
+        <button ng-click="cancel()" class="btn btn-default">Cancel</button>
+        <button ng-click="save()"  class="btn btn-primary">Save</button>
     </form>
 </div>
 
+<script src="/js/controllers/admin.user.edit.js"></script>

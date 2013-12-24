@@ -1,8 +1,23 @@
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
 
+
+exports.get = function (req, res) {
+    User.findOne({
+        _id: req.params.id
+    }, function (err, item) {
+        if (err)
+            console.log(item);
+
+        res.json(item);
+    })
+}
+
+
 exports.delete = function (req, res) {
-    User.findOne( {_id :  req.params.id}, function (err, item) {
+    User.findOne({
+        _id: req.params.id
+    }, function (err, item) {
         if (err)
             console.log(items);
 
@@ -14,19 +29,32 @@ exports.delete = function (req, res) {
 }
 
 exports.update = function (req, res) {
-    User.findOne( {_id :  req.params.id}, function (err, item) {
+    User.findOne({
+        _id: req.params.id
+    }, function (err, item) {
         if (err)
-            console.log(items);
+            console.log(err);
 
-        res.render("admin/user/edit", {
-            user: req.user,
-            item: item
+        for (var field in User.schema.paths) {
+            if ((field !== '_id') && (field !== '__v')) {
+                if (req.body[field] !== undefined) {
+                    item[field] = req.body[field];
+                }
+            }
+        }
+
+        item.save();
+        
+        res.json({
+            result: true
         });
     })
 }
 
 exports.edit = function (req, res) {
-    User.findOne( {_id :  req.params.id}, function (err, item) {
+    User.findOne({
+        _id: req.params.id
+    }, function (err, item) {
         if (err)
             console.log(items);
 

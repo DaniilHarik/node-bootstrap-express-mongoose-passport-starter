@@ -72,5 +72,7 @@ module.exports = function (app, passport) {
     });
     
     app.get('/admin/users', AdminUserController.index);
+    app.get('/admin/users/:id', AdminUserController.get);
     app.get('/admin/users/:id/edit', AdminUserController.edit);
+    app.put('/admin/users/:id', AdminUserController.update);
 }
