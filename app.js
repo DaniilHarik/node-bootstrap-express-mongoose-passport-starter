@@ -6,7 +6,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     passport = require("passport"),
     flash = require("connect-flash"),
-    engine = require('ejs-locals');
+    engine = require('ejs-locals'),
+    validator = require('express-validator');
 
 var env = process.env.NODE_ENV || 'development',
     config = require('./config/config')[env];
@@ -35,6 +36,7 @@ app.configure(function () {
     app.use(express.logger('dev'));
     app.use(express.cookieParser());
     app.use(express.bodyParser());
+    app.use(validator([])); 
     app.use(express.session({
         secret: 'asdalaspnlsfasjkhk',
         cookie: { maxAge: 60000 },

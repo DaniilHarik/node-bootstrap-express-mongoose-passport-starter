@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
-    binder = require('../../util/binder.js')
+    binder = require('../../util/binder.js'),
+    validator = require('express-validator'),
+    sanitize = require('validator').sanitize,
     User = mongoose.model('User');
 
 
@@ -43,6 +45,19 @@ exports.edit = function (req, res) {
 }
 
 exports.update = function (req, res) {
+    req.body.role = sanitize(req.body.role).toInt(); 
+    
+    req.assert('email', 'required').notEmpty();
+    req.assert('email', 'valid email required').isEmail();
+    req.assert('password', 'required').notEmpty();
+
+    var errors = req.validationErrors();
+    
+    if(errors !== null && errors.length > 0){
+        res.json({result : false, errors : errors});
+        return;
+    }
+
     User.findOne({
         _id: req.params.id
     }, function (err, item) {
@@ -52,7 +67,7 @@ exports.update = function (req, res) {
         binder(req, item, User)
 
         item.save();
-        
+
         res.json({
             result: true
         });

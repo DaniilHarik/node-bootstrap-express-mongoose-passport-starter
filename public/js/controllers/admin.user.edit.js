@@ -4,12 +4,13 @@ angular.module('app', []);
 
 function AdminUserEditController($scope, $http) {
     $scope.model = {};
+
     $scope.roles = [{
-        name: 'user',
-        value: 10
+        title: 'user',
+        id: 0
         }, {
-        name: 'admin',
-        value: 1
+        title: 'admin',
+        id: 1
     }];
 
     $scope.load = function (id) {
@@ -19,11 +20,13 @@ function AdminUserEditController($scope, $http) {
             $scope.model = data;
         });
     }
-    
+
     $scope.save = function () {
         $http.put(url + $scope.id, $scope.model).
         success(function (data) {
-            
+            if (!data.result) {
+                alert("data.errors[0].msg");
+            }
         });
     };
 }
