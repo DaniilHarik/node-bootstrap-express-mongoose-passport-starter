@@ -7,7 +7,8 @@ var express = require('express'),
     passport = require("passport"),
     flash = require("connect-flash"),
     engine = require('ejs-locals'),
-    validator = require('express-validator');
+    validator = require('express-validator'),
+    finder = require('./config/middlewares/finder');
 
 var env = process.env.NODE_ENV || 'development',
     config = require('./config/config')[env];
@@ -48,6 +49,7 @@ app.configure(function () {
     app.use(passport.session());
     app.use(express.methodOverride());
     app.use(flash());
+    app.use(finder.find);
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
 });

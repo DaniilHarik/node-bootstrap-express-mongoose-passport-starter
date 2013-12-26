@@ -1,4 +1,5 @@
-// Does model binding
+var check = require('validator').check,
+    sanitize = require('validator').sanitize;
 
 module.exports = function (req, item, model) {
     for (var field in model.schema.paths) {
