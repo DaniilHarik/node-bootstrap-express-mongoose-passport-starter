@@ -4,6 +4,8 @@ angular.module('app', []);
 
 function AdminUserEditController($scope, $http) {
     $scope.model = {};
+    $scope.success = false;
+    $scope.validationErrors = []
 
     $scope.roles = [{
         title: 'user',
@@ -22,10 +24,15 @@ function AdminUserEditController($scope, $http) {
     }
 
     $scope.save = function () {
+        $scope.validationErrors = [];
+        $scope.success = false;
+        
         $http.put(url + $scope.id, $scope.model).
         success(function (data) {
             if (!data.result) {
-                alert("data.errors[0].msg");
+                $scope.validationErrors = data.errors;
+            } else {
+                $scope.success = true;
             }
         });
     };

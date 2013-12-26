@@ -1,6 +1,14 @@
 <% layout( '../../layout') -%>
 
 <div ng-controller="AdminUserEditController" class="col-sm-6 col-sm-offset-3">
+    <div class="alert alert-success" ng-if="success">
+       Saved
+    </div>
+    <div class="alert alert-danger" ng-if="validationErrors.length > 0">
+        <li ng-repeat="error in validationErrors">
+             {{error.param}} {{error.msg}}
+        </li>
+    </div>
     <form novalidate  ng-init="load('users/<%= item.id %>')">
         <div class="form-group">
             <label>Firstname:</label>
