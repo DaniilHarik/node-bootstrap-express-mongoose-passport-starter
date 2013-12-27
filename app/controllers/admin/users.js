@@ -4,20 +4,33 @@ var mongoose = require('mongoose'),
     sanitize = require('validator').sanitize,
     User = mongoose.model('User');
 
+var views = "admin/user/";
 
 exports.get = function (req, res) {
     res.json(req.item);
 }
 
+exports.index = function (req, res) {
+    User.find(function (err, items) {
+        if (err)
+            console.log(items);
+
+        res.render(views+ "index", {
+            user: req.user,
+            items: items
+        });
+    })
+}
+
 exports.delete = function (req, res) {
-    res.render("admin/user/edit", {
+    res.render(views + "edit", {
         user: req.user,
         item: req.item
     });
 }
 
 exports.edit = function (req, res) {
-    res.render("admin/user/edit", {
+    res.render(views + "edit", {
         user: req.user,
         item: req.item
     });
@@ -26,9 +39,9 @@ exports.edit = function (req, res) {
 exports.update = function (req, res) {
     req.body.role = sanitize(req.body.role).toInt();
 
-    req.assert('email', 'required').notEmpty();
+    req.assert('email', 'email is required').notEmpty();
     req.assert('email', 'valid email required').isEmail();
-    req.assert('password', 'required').notEmpty();
+    req.assert('password', 'password is required').notEmpty();
 
     var errors = req.validationErrors();
 
@@ -47,16 +60,4 @@ exports.update = function (req, res) {
     res.json({
         result: true
     });
-}
-
-exports.index = function (req, res) {
-    User.find(function (err, items) {
-        if (err)
-            console.log(items);
-
-        res.render("admin/user/index", {
-            user: req.user,
-            items: items
-        });
-    })
 }

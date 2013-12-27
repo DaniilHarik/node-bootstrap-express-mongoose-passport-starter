@@ -6,7 +6,7 @@
     </div>
     <div class="alert alert-danger" ng-if="validationErrors.length > 0">
         <li ng-repeat="error in validationErrors">
-             {{error.param}} {{error.msg}}
+             {{error.msg}}
         </li>
     </div>
     <form novalidate  ng-init="load('users/<%= item.id %>')">

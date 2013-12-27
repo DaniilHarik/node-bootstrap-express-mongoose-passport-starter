@@ -1,7 +1,7 @@
 var User = require('../app/models/user');
 
-var UserController = require('../app/controllers/user');
-var AdminUserController = require('../app/controllers/admin/user');
+var AdminUsersController = require('../app/controllers/admin/users');
+var AdminGroupsController = require('../app/controllers/admin/groups');
 
 var Auth = require('./middlewares/authorization.js');
 
@@ -71,8 +71,14 @@ module.exports = function (app, passport) {
         res.redirect('/login');
     });
     
-    app.get('/admin/users', AdminUserController.index);
-    app.get('/admin/users/:id', AdminUserController.get);
-    app.get('/admin/users/:id/edit', AdminUserController.edit);
-    app.put('/admin/users/:id', AdminUserController.update);
+    app.get('/admin/users', AdminUsersController.index);
+    app.get('/admin/users/:id', AdminUsersController.get);
+    app.get('/admin/users/:id/edit', AdminUsersController.edit);
+    app.put('/admin/users/:id', AdminUsersController.update);
+    
+    app.get('/admin/groups', AdminGroupsController.index);
+    app.get('/admin/groups/:id', AdminGroupsController.get);
+    app.get('/admin/groups/:id/create', AdminGroupsController.create);
+    app.get('/admin/groups/:id/edit', AdminGroupsController.edit);
+    app.put('/admin/groups/:id', AdminGroupsController.update);
 }
