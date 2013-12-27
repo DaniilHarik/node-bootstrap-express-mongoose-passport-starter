@@ -1,6 +1,6 @@
 <% layout( '../../layout') -%>
     
-<div ng-controller="AdminGroupCreateController" class="col-sm-6 col-sm-offset-3" ng-init="load('users/<%= item.id %>')">
+<div ng-controller="AdminGroupEditController" class="col-sm-6 col-sm-offset-3" ng-init="load('groups/<%= item.id %>')">
     <%- include _partial.ejs %>
 </div>
 

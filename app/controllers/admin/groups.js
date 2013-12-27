@@ -6,6 +6,20 @@ var mongoose = require('mongoose'),
 
 var views = "admin/group/";
 
+function validate(req, res){
+    req.assert('name', 'name is required').notEmpty();
+    var errors = req.validationErrors();
+
+    if (errors !== null && errors.length > 0) {
+        res.json({
+            result: false,
+            errors: errors
+        });
+        return false;
+    }
+    return true;
+}
+
 exports.get = function (req, res) {
     res.json(req.item);
 }
@@ -43,21 +57,11 @@ exports.add = function (req, res) {
 }
 
 exports.create = function (req, res) {
-    req.assert('name', 'name is required').notEmpty();
-    var errors = req.validationErrors();
-
-    if (errors !== null && errors.length > 0) {
-        res.json({
-            result: false,
-            errors: errors
-        });
+    if(!validate(req, res))
         return;
-    }
-    
-    var item = new Group()
-    
-    binder(req, item, Group)
 
+    var item = new Group()
+    binder(req, item, Group)
     item.save();
 
     res.json({
@@ -66,19 +70,11 @@ exports.create = function (req, res) {
 }
 
 exports.update = function (req, res) {
-    req.assert('name', 'namme is required').notEmpty();
-    var errors = req.validationErrors();
-
-    if (errors !== null && errors.length > 0) {
-        res.json({
-            result: false,
-            errors: errors
-        });
+    if(!validate(req, res))
         return;
-    }
     
+    console.log("aaa");    
     binder(req, req.item, Group)
-
     req.item.save();
 
     res.json({

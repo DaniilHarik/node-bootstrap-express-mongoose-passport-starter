@@ -14,7 +14,6 @@ exports.find = function (req, res, next) {
     var parts = req.url.split('/');
 
     for (i in parts) {
-        
         if (parts[i].length === 24) {
             id = parts[i];
             continue;
