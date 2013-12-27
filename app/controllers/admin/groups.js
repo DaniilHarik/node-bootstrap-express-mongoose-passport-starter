@@ -36,9 +36,14 @@ exports.edit = function (req, res) {
     });
 }
 
+exports.add = function (req, res) {
+    res.render(views + "create", {
+        user: req.user
+    });
+}
 
 exports.create = function (req, res) {
-    req.assert('name', 'namme is required').notEmpty();
+    req.assert('name', 'name is required').notEmpty();
     var errors = req.validationErrors();
 
     if (errors !== null && errors.length > 0) {
@@ -49,9 +54,11 @@ exports.create = function (req, res) {
         return;
     }
     
-    binder(req, req.item, Group)
+    var item = new Group()
+    
+    binder(req, item, Group)
 
-    req.item.save();
+    item.save();
 
     res.json({
         result: true

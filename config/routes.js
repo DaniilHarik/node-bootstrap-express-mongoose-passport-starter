@@ -76,9 +76,11 @@ module.exports = function (app, passport) {
     app.get('/admin/users/:id/edit', AdminUsersController.edit);
     app.put('/admin/users/:id', AdminUsersController.update);
     
+
     app.get('/admin/groups', AdminGroupsController.index);
+    app.get('/admin/groups/add', AdminGroupsController.add);
+    app.post('/admin/groups', AdminGroupsController.create);
     app.get('/admin/groups/:id', AdminGroupsController.get);
-    app.get('/admin/groups/:id/create', AdminGroupsController.create);
     app.get('/admin/groups/:id/edit', AdminGroupsController.edit);
     app.put('/admin/groups/:id', AdminGroupsController.update);
 }
