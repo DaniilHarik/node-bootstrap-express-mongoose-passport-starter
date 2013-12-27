@@ -43,16 +43,16 @@ exports.delete = function (req, res) {
     });
 }
 
+exports.add = function (req, res) {
+    res.render(views + "add", {
+        user: req.user
+    });
+}
+
 exports.edit = function (req, res) {
     res.render(views + "edit", {
         user: req.user,
         item: req.item
-    });
-}
-
-exports.add = function (req, res) {
-    res.render(views + "create", {
-        user: req.user
     });
 }
 
