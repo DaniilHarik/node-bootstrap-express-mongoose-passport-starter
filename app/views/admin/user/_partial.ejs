@@ -27,8 +27,13 @@
     </div>
     <div class="form-group">
         <label>Role:</label>
-        <select ng-model="model.role" ng-options="obj.id as obj.name for obj in roles"></select>
+        <select class="form-control" ng-model="model.role" ng-options="obj.id as obj.name for obj in roles"></select>
         <input type="hidden" name="role" value="{{model.role}}" />
+    </div>
+     <div class="form-group">
+        <label>Group:</label>
+        <select class="form-control" ng-model="model.group" ng-options="obj._id as obj.name for obj in groups"></select>
+        <input type="hidden" name="group" value="{{model.group}}" />
     </div>
     <a href="/admin/users" class="btn btn-default">Back</a>
     <button ng-click="save()" class="btn btn-primary">Save</button>

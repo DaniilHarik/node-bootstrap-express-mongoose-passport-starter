@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 var views = "admin/group/";
 
-function validate(req, res){
+function validate(req, res) {
     req.assert('name', 'name is required').notEmpty();
     var errors = req.validationErrors();
 
@@ -29,10 +29,14 @@ exports.index = function (req, res) {
         if (err)
             console.log(items);
 
-        res.render(views+ "index", {
-            user: req.user,
-            items: items
-        });
+        if (req.accepts('json')) {
+            res.json(items);
+        } else {
+            res.render(views + "index", {
+                user: req.user,
+                items: items
+            });
+        }
     })
 }
 
@@ -57,7 +61,7 @@ exports.edit = function (req, res) {
 }
 
 exports.create = function (req, res) {
-    if(!validate(req, res))
+    if (!validate(req, res))
         return;
 
     var item = new Repository()
@@ -70,7 +74,7 @@ exports.create = function (req, res) {
 }
 
 exports.update = function (req, res) {
-    if(!validate(req, res))
+    if (!validate(req, res))
         return;
 
     binder(req, req.item, Repository)

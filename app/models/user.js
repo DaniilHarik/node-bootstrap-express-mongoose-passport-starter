@@ -1,9 +1,11 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+  , Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
 UserSchema = mongoose.Schema({
     firstname: String,
     lastname: String,
+    group : { type: Schema.Types.ObjectId, ref: 'Group' },
     email: {
         type: String, required: true
     },
@@ -18,7 +20,8 @@ UserSchema = mongoose.Schema({
         id: String,
         email: String,
         name: String
-    }
+    },
+    updated: { type: Date, default: Date.now }
 });
 
 

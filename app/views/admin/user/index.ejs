@@ -5,6 +5,7 @@
         <tr>
             <th>Name</th>
             <th>Fullname</th>
+            <th>Group</th>
             <th>Role</th>
             <th>Actions</th>
         </tr>
@@ -20,6 +21,11 @@
                 </td>
                 <td>
                     <%= item.firstname %> <%= item.lastname %> 
+                </td>
+                <td>
+                    <% if(item.group !== null){%>
+                        <%= item.group.name %>
+                    <% } %>
                 </td>
                 <td>
                     <%= item.role %>

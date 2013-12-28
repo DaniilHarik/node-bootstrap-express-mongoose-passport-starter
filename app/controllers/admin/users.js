@@ -28,14 +28,18 @@ exports.get = function (req, res) {
 }
 
 exports.index = function (req, res) {
-    User.find(function (err, items) {
+    User.find().populate('group', 'name').exec(function (err, items) {
         if (err)
             console.log(items);
 
-        res.render(views + "index", {
-            user: req.user,
-            items: items
-        });
+        if (req.is('json')) {
+            res.json(items);
+        } else {
+            res.render(views + "index", {
+                user: req.user,
+                items: items
+            });
+        }
     })
 }
 
@@ -56,7 +60,7 @@ exports.edit = function (req, res) {
 exports.update = function (req, res) {
     if (!validate(req, res))
         return;
-    
+
     req.body.role = sanitize(req.body.role).toInt();
 
     binder(req, req.item, User)
