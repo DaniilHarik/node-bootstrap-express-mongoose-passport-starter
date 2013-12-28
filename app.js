@@ -39,13 +39,12 @@ app.configure(function () {
     app.use(express.bodyParser());
     app.use(validator([]));
 
-
     var session = express.session({
         store: new MongoStore({
-            url: 'mongodb://localhost:27017/test',
+            url: 'mongodb://localhost:27017/sessions',
             maxAge: 300000
         }),
-        secret: 'asdalaspnlsfasjkhk'
+        secret: '5yH9xVLBLDVuXiB8IYVD'
     });
     app.use(session);
 
