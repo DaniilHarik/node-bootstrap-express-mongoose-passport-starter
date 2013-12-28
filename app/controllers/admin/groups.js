@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     binder = require('../../util/binder.js'),
     validator = require('express-validator'),
     sanitize = require('validator').sanitize,
-    Group = mongoose.model('Group');
+    Repository = mongoose.model('Group');
 
 var views = "admin/group/";
 
@@ -25,7 +25,7 @@ exports.get = function (req, res) {
 }
 
 exports.index = function (req, res) {
-    Group.find(function (err, items) {
+    Repository.find(function (err, items) {
         if (err)
             console.log(items);
 
@@ -60,8 +60,8 @@ exports.create = function (req, res) {
     if(!validate(req, res))
         return;
 
-    var item = new Group()
-    binder(req, item, Group)
+    var item = new Repository()
+    binder(req, item, Repository)
     item.save();
 
     res.json({
@@ -72,9 +72,8 @@ exports.create = function (req, res) {
 exports.update = function (req, res) {
     if(!validate(req, res))
         return;
-    
-    console.log("aaa");    
-    binder(req, req.item, Group)
+
+    binder(req, req.item, Repository)
     req.item.save();
 
     res.json({

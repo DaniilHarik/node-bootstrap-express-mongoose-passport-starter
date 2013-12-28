@@ -1,4 +1,8 @@
-Source code for my boilerplate node web app starter template, consisting of:
+Source code for my boilerplate node web app starter template, 
+
+What makes different is convention based CRUD implementaton.
+
+The code is based on MEAN stack and constits of:
 
 * express.js
 * ejs
@@ -24,6 +28,7 @@ For running the application :
 
 * User roles/groups
 * Basic user and group administration
+* Create documentation
 
 ## License
 

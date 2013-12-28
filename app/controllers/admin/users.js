@@ -6,6 +6,23 @@ var mongoose = require('mongoose'),
 
 var views = "admin/user/";
 
+function validate(req, res) {
+    req.assert('email', 'email is required').notEmpty();
+    req.assert('email', 'valid email required').isEmail();
+    req.assert('password', 'password is required').notEmpty();
+
+    var errors = req.validationErrors();
+
+    if (errors !== null && errors.length > 0) {
+        res.json({
+            result: false,
+            errors: errors
+        });
+        return false;
+    }
+    return true;
+}
+
 exports.get = function (req, res) {
     res.json(req.item);
 }
@@ -15,7 +32,7 @@ exports.index = function (req, res) {
         if (err)
             console.log(items);
 
-        res.render(views+ "index", {
+        res.render(views + "index", {
             user: req.user,
             items: items
         });
@@ -37,22 +54,11 @@ exports.edit = function (req, res) {
 }
 
 exports.update = function (req, res) {
+    if (!validate(req, res))
+        return;
+    
     req.body.role = sanitize(req.body.role).toInt();
 
-    req.assert('email', 'email is required').notEmpty();
-    req.assert('email', 'valid email required').isEmail();
-    req.assert('password', 'password is required').notEmpty();
-
-    var errors = req.validationErrors();
-
-    if (errors !== null && errors.length > 0) {
-        res.json({
-            result: false,
-            errors: errors
-        });
-        return;
-    }
-    
     binder(req, req.item, User)
 
     req.item.save();
