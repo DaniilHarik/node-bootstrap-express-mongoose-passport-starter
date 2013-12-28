@@ -8,10 +8,10 @@ function AdminUserEditController($scope, $http) {
     $scope.validationErrors = []
 
     $scope.roles = [{
-        title: 'user',
-        id: 0
+        name: 'user',
+        id: 10
         }, {
-        title: 'admin',
+        name: 'admin',
         id: 1
     }];
 
