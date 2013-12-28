@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Fullname</th>
             <th>Role</th>
             <th>Actions</th>
         </tr>
@@ -16,6 +17,9 @@
                         <%= item.email %>
                             <i class="icon-envelope"></i>
                     </a>
+                </td>
+                <td>
+                    <%= item.firstname %> <%= item.lastname %> 
                 </td>
                 <td>
                     <%= item.role %>

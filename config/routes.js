@@ -71,16 +71,16 @@ module.exports = function (app, passport) {
         res.redirect('/login');
     });
     
-    app.get('/admin/users', AdminUsersController.index);
-    app.get('/admin/users/:id', AdminUsersController.get);
-    app.get('/admin/users/:id/edit', AdminUsersController.edit);
-    app.put('/admin/users/:id', AdminUsersController.update);
+    app.get('/admin/users', Auth.isAuthenticated, AdminUsersController.index);
+    app.get('/admin/users/:id', Auth.isAuthenticated, AdminUsersController.get);
+    app.get('/admin/users/:id/edit', Auth.isAuthenticated, AdminUsersController.edit);
+    app.put('/admin/users/:id', Auth.isAuthenticated, AdminUsersController.update);
     
 
-    app.get('/admin/groups', AdminGroupsController.index);
-    app.get('/admin/groups/add', AdminGroupsController.add);
-    app.post('/admin/groups', AdminGroupsController.create);
-    app.get('/admin/groups/:id', AdminGroupsController.get);
-    app.get('/admin/groups/:id/edit', AdminGroupsController.edit);
-    app.put('/admin/groups/:id', AdminGroupsController.update);
+    app.get('/admin/groups', Auth.isAuthenticated, AdminGroupsController.index);
+    app.get('/admin/groups/add', Auth.isAuthenticated, AdminGroupsController.add);
+    app.post('/admin/groups', Auth.isAuthenticated, AdminGroupsController.create);
+    app.get('/admin/groups/:id', Auth.isAuthenticated, AdminGroupsController.get);
+    app.get('/admin/groups/:id/edit', Auth.isAuthenticated, AdminGroupsController.edit);
+    app.put('/admin/groups/:id', Auth.isAuthenticated, AdminGroupsController.update);
 }

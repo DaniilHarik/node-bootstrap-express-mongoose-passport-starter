@@ -1,41 +1,7 @@
 <% layout( '../../layout') -%>
 
-<div ng-controller="AdminUserEditController" class="col-sm-6 col-sm-offset-3" ng-init="load('users/<%= item.id %>')">
-    <div class="alert alert-success" ng-if="success">
-       Saved
-    </div>
-    <div class="alert alert-danger" ng-if="validationErrors.length > 0">
-        <li ng-repeat="error in validationErrors">
-             {{error.msg}}
-        </li>
-    </div>
-    <form novalidate>
-        <div class="form-group">
-            <label>Firstname:</label>
-            <input type="text" class="form-control" ng-model="model.firstname"/>
-        </div>
-
-        <div class="form-group">
-            <label>Lastname:</label>
-            <input type="text" class="form-control" ng-model="model.lastname"/>
-        </div>
-            
-        <div class="form-group">
-            <label>Email:</label>
-            <input type="text" class="form-control" ng-model="model.email" required/>
-        </div>
-        <div class="form-group">
-            <label>Password:</label>
-            <input type="text" class="form-control" ng-model="model.password" required/>
-        </div>
-        <div class="form-group">
-            <label>Role:</label>
-            <select ng-model="model.role" ng-options="obj.id as obj.name for obj in roles"></select>
-            <input type="hidden" name="role" value="{{model.role}}" />
-        </div>
-        <a href="/admin/groups" class="btn btn-default">Back</a>
-        <button ng-click="save()"  class="btn btn-primary">Save</button>
-    </form>
+<div ng-controller="AdminUserController" class="col-sm-6 col-sm-offset-3" ng-init="load('users/<%= item.id %>')">
+       <%- include _partial.ejs %>
 </div>
 
-<script src="/js/controllers/admin.user.edit.js"></script>
+

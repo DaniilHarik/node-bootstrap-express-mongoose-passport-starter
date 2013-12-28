@@ -2,7 +2,7 @@ var url = "http://localhost:8000/admin/";
 
 angular.module('app', []);
 
-function AdminUserEditController($scope, $http) {
+function AdminUserController($scope, $http) {
     $scope.model = {};
     $scope.success = false;
     $scope.validationErrors = []
