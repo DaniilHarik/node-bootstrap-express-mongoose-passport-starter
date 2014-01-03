@@ -6,7 +6,15 @@ exports.isAuthenticated = function (req, res, next){
     }else{
         res.redirect("/login");
     }
-}
+};
+
+exports.isAdmin = function (req, res, next){
+    if(req.isAuthenticated() && req.role === 10){
+        next();
+    }else{
+        res.redirect("/login");
+    }
+};
 
 exports.userExist = function(req, res, next) {
     User.count({
@@ -18,4 +26,4 @@ exports.userExist = function(req, res, next) {
             res.redirect("/signup");
         }
     });
-}
+};

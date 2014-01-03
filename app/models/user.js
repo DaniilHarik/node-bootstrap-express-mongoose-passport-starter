@@ -24,8 +24,6 @@ UserSchema = mongoose.Schema({
     updated: { type: Date, default: Date.now }
 });
 
-
-
 // checking if password is valid using bcrypt
 UserSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
@@ -69,7 +67,7 @@ UserSchema.statics.findOrCreateFaceBookUser = function (profile, done) {
             });
         }
     });
-}
+};
 
 var User = mongoose.model("User", UserSchema);
 module.exports = User;

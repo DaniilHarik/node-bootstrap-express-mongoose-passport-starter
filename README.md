@@ -1,8 +1,8 @@
 Source code for my boilerplate node web app starter template, 
 
-What makes different is convention based CRUD implementaton.
+What makes different is convention based CRUD implementation.
 
-The code is based on MEAN stack and constits of:
+The code is based on MEAN stack and consists of:
 
 * express.js
 * ejs
@@ -14,7 +14,7 @@ The code is based on MEAN stack and constits of:
 * express-validator
 * nodemailer
 
-Basic signup and login is configured to run out of the box.
+Basic sign-up and login is configured to run out of the box.
 
 MongoStore is used for session persistance.
 
