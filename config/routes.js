@@ -1,3 +1,5 @@
+"use strict";
+
 var User = require('../app/models/user');
 
 var AdminUsersController = require('../app/controllers/admin/users');
@@ -21,7 +23,7 @@ module.exports = function (app, passport) {
     app.get("/login", function (req, res) {
         res.render("user/login", {
             user: req.user,
-            message : req.flash("error")
+            message: req.flash("error")
         });
     });
 
@@ -34,14 +36,14 @@ module.exports = function (app, passport) {
     app.get("/signup", function (req, res) {
         res.render("user/signup", {
             user: req.user,
-            message : req.flash("error")
+            message: req.flash("error")
         });
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile',
-        failureRedirect : '/signup',
-        failureFlash : true
+        successRedirect: '/profile',
+        failureRedirect: '/signup',
+        failureFlash: true
     }));
 
 //    app.get("/auth/facebook", passport.authenticate("facebook", {
@@ -82,4 +84,4 @@ module.exports = function (app, passport) {
     app.get('/admin/groups/:id', Auth.isAuthenticated, AdminGroupsController.get);
     app.get('/admin/groups/:id/edit', Auth.isAuthenticated, AdminGroupsController.edit);
     app.put('/admin/groups/:id', Auth.isAuthenticated, AdminGroupsController.update);
-}
+};

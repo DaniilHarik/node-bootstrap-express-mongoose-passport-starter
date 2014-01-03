@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express'),
     fs = require('fs'),
     http = require('http'),
@@ -22,7 +24,7 @@ fs.readdirSync(models_dir).forEach(function (file) {
     require(models_dir + '/' + file);
 });
 
-require('./config/passport')(passport, config)
+require('./config/passport')(passport, config);
 
 var app = express();
 
@@ -61,14 +63,14 @@ app.configure('development', function () {
     app.use(express.errorHandler());
 });
 
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     res.status(err.status || 500);
     res.render('500', {
         error: err
     });
 });
 
-app.use(function (req, res, next) {
+app.use(function (req, res) {
     res.status(404);
     if (req.accepts('html')) {
         res.render('404', {
