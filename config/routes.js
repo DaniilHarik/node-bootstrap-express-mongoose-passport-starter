@@ -20,7 +20,7 @@ module.exports = function (app, passport) {
 
     app.get("/login", function (req, res) {
         res.render("user/login", {
-            user: req.user, 
+            user: req.user,
             message : req.flash("error")
         });
     });
@@ -28,22 +28,21 @@ module.exports = function (app, passport) {
     app.post("/login", passport.authenticate('local-login', {
         successRedirect: "/",
         failureRedirect: "/login",
-        failureFlash: true 
+        failureFlash: true
     }));
 
     app.get("/signup", function (req, res) {
         res.render("user/signup", {
-            user: req.user, 
+            user: req.user,
             message : req.flash("error")
         });
     });
-    
+
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/profile',
         failureRedirect : '/signup',
         failureFlash : true
     }));
-    
 
 //    app.get("/auth/facebook", passport.authenticate("facebook", {
 //        scope: "email"
@@ -70,12 +69,12 @@ module.exports = function (app, passport) {
         req.logout();
         res.redirect('/login');
     });
-    
+
     app.get('/admin/users', Auth.isAuthenticated, AdminUsersController.index);
     app.get('/admin/users/:id', Auth.isAuthenticated, AdminUsersController.get);
     app.get('/admin/users/:id/edit', Auth.isAuthenticated, AdminUsersController.edit);
     app.put('/admin/users/:id', Auth.isAuthenticated, AdminUsersController.update);
-    
+
 
     app.get('/admin/groups', Auth.isAuthenticated, AdminGroupsController.index);
     app.get('/admin/groups/add', Auth.isAuthenticated, AdminGroupsController.add);

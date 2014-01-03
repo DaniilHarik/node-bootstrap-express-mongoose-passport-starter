@@ -1,3 +1,5 @@
+"use strict";
+
 var mongoose = require('mongoose'),
     binder = require('../../util/binder.js'),
     validator = require('express-validator'),
@@ -22,7 +24,7 @@ function validate(req, res) {
 
 exports.get = function (req, res) {
     res.json(req.item);
-}
+};
 
 exports.index = function (req, res) {
     Repository.find(function (err, items) {
@@ -37,28 +39,28 @@ exports.index = function (req, res) {
                 items: items
             });
         }
-    })
-}
+    });
+};
 
-exports.delete = function (req, res) {
+exports.remove = function (req, res) {
     res.render(views + "edit", {
         user: req.user,
         item: req.item
     });
-}
+};
 
 exports.add = function (req, res) {
     res.render(views + "add", {
         user: req.user
     });
-}
+};
 
 exports.edit = function (req, res) {
     res.render(views + "edit", {
         user: req.user,
         item: req.item
     });
-}
+};
 
 exports.create = function (req, res) {
     if (!validate(req, res))
@@ -71,7 +73,7 @@ exports.create = function (req, res) {
     res.json({
         result: true
     });
-}
+};
 
 exports.update = function (req, res) {
     if (!validate(req, res))
@@ -83,4 +85,4 @@ exports.update = function (req, res) {
     res.json({
         result: true
     });
-}
+};
